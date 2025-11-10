@@ -30,26 +30,35 @@ public class TestPicture17
      
      //relative path!!!! (ON TEST)
      //                          dir/folder/file
-     Picture apic = new Picture("images\\beach.jpg");
+     Picture beach = new Picture("images\\beach.jpg");
      Picture ferris1 = new Picture("images/2000 ferris wheel2.jpg");
      Picture moto = new Picture("images/redMotorcycle.jpg");
-     Picture ferris3 = new Picture("images/2000 ferris wheel2.jpg");
-
+     Picture wall = new Picture("images/wall.jpg");
      //displays the picture
-     apic.explore();
-     ferris1.explore();
-     moto.explore();
+     //apic.explore();
+     //ferris1.explore();
+     //moto.explore();
      
      //makes an array of pixels
      Pixel[] pixels;
      //gets pixels from picture and assigns to pixels array
      pixels = ferris1.getPixels();
      
-    
+     Pixel[] Mpixels;
+     Mpixels = moto.getPixels();
+     
+     Pixel[] Bpixels;
+     Bpixels = beach.getPixels();
+     
+     Pixel[] Wpixels;
+     Wpixels = wall.getPixels();
+     
      //how many pixels or how large array
     System.out.println("This is a large array"+pixels.length  );
-
-    /**/
+    
+    int red, green, blue;
+    
+    /*
         //access each index
     System.out.println(pixels[17]);
     //access each pixel
@@ -62,19 +71,18 @@ public class TestPicture17
     
     Color newColor = new Color(255, 99, 71);
     
-    
     ferr17.setRed(240);
     ferr17.setGreen(100);
     ferr17.setBlue(200);
     
     spot.setColor(newColor);
     spot2.setColor(newColor);
-    ferris1.explore();
+    //ferris1.explore();
 
-    for (int i = 0; i < 10000; i++)
+    for (int i = 0; i < 50000; i++)
     {
-        Pixel yuck = ferris1.getPixel((int)(Math.random()*200), (int)(Math.random()*1000));
-        yuck.setColor(Color.green);
+        Pixel yuck = ferris1.getPixel((int)(Math.random()*1000), (int)(Math.random()*668));
+        yuck.setColor(Color.orange);
     }
     ferris1.explore();
     
@@ -83,13 +91,92 @@ public class TestPicture17
    // loop to access indexes of array or collection
 
     //for each loop spot  is a ?
-    for (Pixel spot : pixels)
-    System.out.println( spot );
-
-
+    moto.explore();
+    
+    for (Pixel spot1 : Mpixels)
+    {
+        //System.out.println(spot1);
+        red = spot1.getRed();
+        red = (int)(red * .25);
+        spot1.setRed(red);
+    }
+    moto.explore();
+    
+    for (Pixel spotb : Mpixels)
+    {
+        blue = spotb.getBlue();
+        blue = (int)(blue * (Math.random()));
+        spotb.setBlue(blue);
+        
+        green = spotb.getGreen();
+        green = (int)(green * (Math.random()));
+        spotb.setGreen(green);
+    }
+    moto.explore();
    
- /**/
+ /*
+    //ADJUST RED
+    moto.explore();
+    for (Pixel spot1 : Mpixels)
+    {
+        //System.out.println(spot1);
+        red = spot1.getRed();
+        red = (int)(red * .25);
+        spot1.setRed(red);
+    }
+    moto.explore();
+    
+    
+ /*
+     //NEGATE()
+     beach.explore();
+     for (Pixel p : Bpixels)
+     {
+        blue = p.getBlue();
+        blue = (255 - blue);
+        p.setBlue(blue);
+        
+        green = p.getGreen();
+        green = (255 - green);
+        p.setGreen(green);
+        
+        red = p.getRed();
+        red = (255 - red);
+        p.setRed(red);
+     }
+     beach.explore();
 
+/*
+    //GRAYSCALE()
+     wall.explore();
+     int avg;
+     for (Pixel p : Wpixels)
+     {
+        blue = p.getBlue();
+        green = p.getGreen();
+        red = p.getRed();
+        avg = (blue + green + red)/3;
+        p.setBlue(avg);
+        p.setGreen(avg);
+        p.setRed(avg);
+     }
+     wall.explore();
+/**/
+    //DARKEN()
+     wall.explore();
+     int avg;
+     for (Pixel p : Wpixels)
+     {
+        blue = p.getBlue();
+        green = p.getGreen();
+        red = p.getRed();
+        avg = (blue + green + red)/3;
+        p.setBlue(avg);
+        p.setGreen(avg);
+        p.setRed(avg);
+     }
+     wall.explore();
+     
  /**
   * Method to clear red from picture
   * @param none
