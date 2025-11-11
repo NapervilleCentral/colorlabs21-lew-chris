@@ -30,33 +30,44 @@ public class TestPicture17
      
      //relative path!!!! (ON TEST)
      //                          dir/folder/file
-     Picture beach = new Picture("images\\beach.jpg");
-     Picture ferris1 = new Picture("images/2000 ferris wheel2.jpg");
-     Picture moto = new Picture("images/redMotorcycle.jpg");
-     Picture wall = new Picture("images/wall.jpg");
+     //Picture beach = new Picture("images\\beach.jpg");
+     //Picture ferris1 = new Picture("images/2000 ferris wheel2.jpg");
+     //Picture moto = new Picture("images/redMotorcycle.jpg");
+     //Picture wall = new Picture("images/wall.jpg");
      //displays the picture
      //apic.explore();
      //ferris1.explore();
      //moto.explore();
      
+     int red, green, blue;
+     
+     Picture m1 = new Picture("images/redMotorcycle.jpg");
+     Picture m2 = new Picture("images/redMotorcycle.jpg");
+     Picture m3 = new Picture("images/redMotorcycle.jpg");
+     Picture m4 = new Picture("images/redMotorcycle.jpg");
+     Picture m5 = new Picture("images/redMotorcycle.jpg");
+     
      //makes an array of pixels
-     Pixel[] pixels;
+     Pixel[] M1pixels;
      //gets pixels from picture and assigns to pixels array
-     pixels = ferris1.getPixels();
+     M1pixels = m1.getPixels();
      
-     Pixel[] Mpixels;
-     Mpixels = moto.getPixels();
+     Pixel[] M2pixels;
+     M2pixels = m2.getPixels();
      
-     Pixel[] Bpixels;
-     Bpixels = beach.getPixels();
+     Pixel[] M3pixels;
+     M3pixels = m3.getPixels();
      
-     Pixel[] Wpixels;
-     Wpixels = wall.getPixels();
+     Pixel[] M4pixels;
+     M4pixels = m4.getPixels();
      
+     Pixel[] M5pixels;
+     M5pixels = m5.getPixels();
+     /*
      //how many pixels or how large array
     System.out.println("This is a large array"+pixels.length  );
     
-    int red, green, blue;
+    
     
     /*
         //access each index
@@ -114,23 +125,22 @@ public class TestPicture17
     }
     moto.explore();
    
- /*
+ /**/
     //ADJUST RED
-    moto.explore();
-    for (Pixel spot1 : Mpixels)
+    m1.explore();
+    for (Pixel spot1 : M1pixels)
     {
         //System.out.println(spot1);
         red = spot1.getRed();
         red = (int)(red * .25);
         spot1.setRed(red);
     }
-    moto.explore();
-    
-    
- /*
+    m1.explore();
+    m1.write("images/MotoAdjust1.jpg");
+        
+ /**/
      //NEGATE()
-     beach.explore();
-     for (Pixel p : Bpixels)
+     for (Pixel p : M2pixels)
      {
         blue = p.getBlue();
         blue = (255 - blue);
@@ -144,28 +154,12 @@ public class TestPicture17
         red = (255 - red);
         p.setRed(red);
      }
-     beach.explore();
+     m2.explore();
 
-/*
-    //GRAYSCALE()
-     wall.explore();
-     int avg;
-     for (Pixel p : Wpixels)
-     {
-        blue = p.getBlue();
-        green = p.getGreen();
-        red = p.getRed();
-        avg = (blue + green + red)/3;
-        p.setBlue(avg);
-        p.setGreen(avg);
-        p.setRed(avg);
-     }
-     wall.explore();
 /**/
-    //DARKEN()
-     wall.explore();
+    //GRAYSCALE()
      int avg;
-     for (Pixel p : Wpixels)
+     for (Pixel p : M3pixels)
      {
         blue = p.getBlue();
         green = p.getGreen();
@@ -175,7 +169,37 @@ public class TestPicture17
         p.setGreen(avg);
         p.setRed(avg);
      }
-     wall.explore();
+     m3.explore();
+/**/
+    //LIGHTEN()
+     for (Pixel p : M4pixels)
+     {
+        blue = p.getBlue();
+        green = p.getGreen();
+        red = p.getRed();
+        p.setBlue((int)(blue * 1.25));
+        p.setGreen((int)(green * 1.25));
+        p.setRed((int)(red * 1.25));
+     }
+     m4.explore();
+     
+/**/
+    //COLORIFY()
+    for (Pixel p : M5pixels)
+     {
+        blue = p.getBlue();
+        green = p.getGreen();
+        red = p.getRed();
+        if (red > 100)
+            {
+             p.setRed(0);
+             p.setGreen();
+            }   
+            
+            
+     }
+     m5.explore();
+     
      
  /**
   * Method to clear red from picture
@@ -221,7 +245,7 @@ final double  FACTOR = .5;
 
   /**/ 
     //write/save a picture as a file
-    ferris1.write("images/ferris11.jpg");
+    //ferris1.write("images/ferris11.jpg");
 
     /**/
   }//main
