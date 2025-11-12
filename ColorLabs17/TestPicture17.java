@@ -155,7 +155,7 @@ public class TestPicture17
         p.setRed(red);
      }
      m2.explore();
-
+     m2.write("images/MotoAdjust2.jpg");
 /**/
     //GRAYSCALE()
      int avg;
@@ -170,6 +170,7 @@ public class TestPicture17
         p.setRed(avg);
      }
      m3.explore();
+     m3.write("images/MotoAdjust3.jpg");
 /**/
     //LIGHTEN()
      for (Pixel p : M4pixels)
@@ -182,6 +183,7 @@ public class TestPicture17
         p.setRed((int)(red * 1.25));
      }
      m4.explore();
+     m4.write("images/MotoAdjust4.jpg");
      
 /**/
     //COLORIFY()
@@ -190,15 +192,15 @@ public class TestPicture17
         blue = p.getBlue();
         green = p.getGreen();
         red = p.getRed();
-        if (red > 100)
+        if ((red < 180 && red > 100) && (green > 100 && green < 200) && blue < 100)
             {
-             p.setRed(0);
-             p.setGreen();
-            }   
-            
-            
+             p.setRed((int)(red*.25));
+             p.setGreen((int)(green*.25));
+             p.setBlue((int)(blue*1.25));
+            }
      }
      m5.explore();
+     m5.write("images/MotoAdjust5.jpg");
      
      
  /**
