@@ -27,12 +27,18 @@ public class SheparFaireyLab
          //relative path
          //Picture apic = new Picture("images\\beach.jpg");
          //change with selfie picture
-         Picture me = new Picture("images/cubs.jpg");
          Picture me1 = new Picture("images/cubs.jpg");
          Picture me2 = new Picture("images/cubs.jpg");
+         Picture me3 = new Picture("images/cubs.jpg");
 
-         Pixel[] Mpixels;
-         Mpixels = me.getPixels();
+         Pixel[] M1pixels;
+         M1pixels = me1.getPixels();
+         
+         Pixel[] M2pixels;
+         M2pixels = me2.getPixels();
+         
+         Pixel[] M3pixels;
+         M3pixels = me3.getPixels();
          
          /**
           * method 1 change
@@ -40,40 +46,96 @@ public class SheparFaireyLab
           */
          
          int avg, blue, green, red;
-         for (Pixel p : Mpixels)
+         
+         Color offwhite = new Color(230, 220, 199);
+         Color lightblue = new Color(106, 174, 199);
+         Color darkblue = new Color(24, 67, 83);
+         Color newred = new Color(166, 15, 15);
+         
+         for (Pixel p : M1pixels)
          {
-            blue = p.getBlue();
-            green = p.getGreen();
-            red = p.getRed();
-            avg = (blue + green + red)/3;
+            avg = (int)(p.getAverage());
             p.setBlue(avg);
             p.setGreen(avg);
             p.setRed(avg);
          }
-         me.explore();
+         me1.explore();
          
-         for (Pixel p : Mpixels)
-         {
+         for (Pixel p : M1pixels)
+         {  
             blue = p.getBlue();
-            
             if (blue < 64)
-                p.(0,0,255);
-            
+                p.setColor(darkblue);
+            else if (blue < 126)
+                p.setColor(newred);
+            else if (blue < 189)
+                p.setColor(lightblue);
+            else
+                p.setColor(offwhite);
          }
-         me.explore();
-         
-         
-         
+         me1.explore();
          
          /**
           * method 2 change
-          * 
           */
-         
+         int max = -1, min = 300, diff;
+         for (Pixel p : M2pixels)
+         {
+            avg = (int)(p.getAverage());
+            if (avg > max)
+                max = avg;
+            else if (avg < min)
+                min = avg;
+            p.setBlue(avg);
+            p.setGreen(avg);
+            p.setRed(avg);
+         }
+         for (Pixel p : M2pixels)
+         {  
+            blue = p.getBlue();
+            diff = (max - min)/4;
+            if (blue < (int)(diff))
+                p.setColor(darkblue);
+            else if (blue < (int)(diff * 2))
+                p.setColor(newred);
+            else if (blue < (int)(diff * 3))
+                p.setColor(lightblue);
+            else
+                p.setColor(offwhite);
+         }
+         me2.explore();
          /**
           * custom color palette
           */
-
          
+         Color offwhite = new Color(230, 220, 199);
+         Color lightblue = new Color(106, 174, 199);
+         Color darkblue = new Color(24, 67, 83);
+         Color newred = new Color(166, 15, 15);
+         
+         for (Pixel p : M3pixels)
+         {
+            avg = (int)(p.getAverage());
+            p.setBlue(avg);
+            p.setGreen(avg);
+            p.setRed(avg);
+         }
+         me3.explore();
+         
+         for (Pixel p : M3pixels)
+         {  
+            blue = p.getBlue();
+            if (blue < 64)
+                p.setColor(darkblue);
+            else if (blue < 126)
+                p.setColor(newred);
+            else if (blue < 189)
+                p.setColor(lightblue);
+            else
+                p.setColor(offwhite);
+         }
+         me3.explore();
+         me3.write("images/ShepardFairey1.jpg");
+
     }//main       
 }//class
