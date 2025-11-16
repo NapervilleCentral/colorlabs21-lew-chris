@@ -48,17 +48,18 @@ public class SheparFaireyLab
          Pixel[] M5pixels;
          M5pixels = me5.getPixels();
          
-         /**
-          * method 1 change
-          * 
-          */
-         
-         int avg, blue, green, red;
+         int avg, blue, green, red, value;
          
          Color offwhite = new Color(230, 220, 199);
          Color lightblue = new Color(106, 174, 199);
          Color darkblue = new Color(24, 67, 83);
          Color newred = new Color(166, 15, 15);
+         
+         /**
+          * method 1 change
+          * 
+          */
+         
          
          for (Pixel p : M1pixels)
          {
@@ -71,12 +72,13 @@ public class SheparFaireyLab
          
          for (Pixel p : M1pixels)
          {  
-            blue = p.getBlue();
-            if (blue < 64)
+            //since all rgb values are the same, doesn't matter which getter i use 
+            value = p.getBlue();//getBlue grabs the new average value from B&W
+            if (value < 64)
                 p.setColor(darkblue);
-            else if (blue < 126)
+            else if (value < 126)
                 p.setColor(newred);
-            else if (blue < 189)
+            else if (value < 189)
                 p.setColor(lightblue);
             else
                 p.setColor(offwhite);
@@ -102,13 +104,13 @@ public class SheparFaireyLab
          }
          for (Pixel p : M2pixels)
          {  
-            blue = p.getBlue();
+            value = p.getBlue();
             diff = (max - min)/4;
-            if (blue < (int)(diff))
+            if (value < (int)(diff))
                 p.setColor(darkblue);
-            else if (blue < (int)(diff * 2))
+            else if (value < (int)(diff * 2))
                 p.setColor(newred);
-            else if (blue < (int)(diff * 3))
+            else if (value < (int)(diff * 3))
                 p.setColor(lightblue);
             else
                 p.setColor(offwhite);
@@ -119,7 +121,9 @@ public class SheparFaireyLab
           * custom color palette
           */
          
+         //SFTry 1
          Color orange = new Color(255, 159, 64);
+         Color neworange = new Color(255, 184, 95);
          Color gray = new Color(211,211,211);
          
          for (Pixel p : M3pixels)
@@ -131,12 +135,12 @@ public class SheparFaireyLab
          }
          for (Pixel p : M3pixels)
          {  
-            blue = p.getBlue();
-            if (blue < 70)
+            value = p.getBlue();
+            if (value < 70)
                 p.setColor(darkblue);
-            else if (blue < 126)
+            else if (value < 126)
                 p.setColor(orange);
-            else if (blue < 189)
+            else if (value < 189)
                 p.setColor(lightblue);
             else
                 p.setColor(offwhite);
@@ -144,6 +148,8 @@ public class SheparFaireyLab
          me3.explore();
          me3.write("images/SFtry1.jpg");
          
+         //SFTry 2
+         
          for (Pixel p : M4pixels)
          {
             avg = (int)(p.getAverage());
@@ -153,14 +159,14 @@ public class SheparFaireyLab
          }
          for (Pixel p : M4pixels)
          { 
-            blue = p.getBlue();
-            if (blue < 70)
+            value = p.getBlue();
+            if (value < 70)
                 p.setColor(darkblue);
-            else if (blue < 110)
+            else if (value < 110)
                 p.setColor(lightblue);
-            else if (blue < 165)
+            else if (value < 165)
                 p.setColor(orange);
-            else if (blue < 200)
+            else if (value < 200)
                 p.setColor(gray);
             else
                 p.setColor(offwhite);
@@ -168,6 +174,8 @@ public class SheparFaireyLab
          me4.explore();
          me4.write("images/SFtry2.jpg");
          
+         //SFTry 3
+         
          for (Pixel p : M5pixels)
          {
             avg = (int)(p.getAverage());
@@ -177,20 +185,19 @@ public class SheparFaireyLab
          }
          for (Pixel p : M5pixels)
          { 
-            blue = p.getBlue();
-            if (blue < 70)
+            value = p.getBlue();
+            if (value < 70)
                 p.setColor(darkblue);
-            else if (blue < 120)
+            else if (value < 130)
                 p.setColor(lightblue);
-            else if (blue < 165)
-                p.setColor(orange);
-            else if (blue < 190)
+            else if (value < 165)
+                p.setColor(neworange);
+            else if (value < 185)
                 p.setColor(gray);
             else
                 p.setColor(offwhite);
          }
          me5.explore();
          me5.write("images/SFtry3.jpg");
-         
     }//main       
 }//class
