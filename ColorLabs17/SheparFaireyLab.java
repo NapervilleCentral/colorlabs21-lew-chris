@@ -84,6 +84,7 @@ public class SheparFaireyLab
                 p.setColor(offwhite);
          }
          me1.explore();
+         me1.write("images/SFOriginal1.jpg");
          
          /**
           * method 2 change
@@ -116,6 +117,7 @@ public class SheparFaireyLab
                 p.setColor(offwhite);
          }
          me2.explore();
+         me2.write("images/SFOriginal2.jpg");
          
          /**
           * custom color palette
