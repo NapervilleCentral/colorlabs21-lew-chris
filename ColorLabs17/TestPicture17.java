@@ -41,17 +41,17 @@ public class TestPicture17
      
      int red, green, blue;
      
-     Picture m1 = new Picture("images/redMotorcycle.jpg");
-     Picture m2 = new Picture("images/redMotorcycle.jpg");
+     Picture m1 = new Picture("images/temple.jpg");
+     /*Picture m2 = new Picture("images/redMotorcycle.jpg");
      Picture m3 = new Picture("images/redMotorcycle.jpg");
      Picture m4 = new Picture("images/redMotorcycle.jpg");
      Picture m5 = new Picture("images/redMotorcycle.jpg");
-     
+     */
      //makes an array of pixels
      Pixel[] M1pixels;
      //gets pixels from picture and assigns to pixels array
      M1pixels = m1.getPixels();
-     
+     /*
      Pixel[] M2pixels;
      M2pixels = m2.getPixels();
      
@@ -125,7 +125,7 @@ public class TestPicture17
     }
     moto.explore();
    
- /**/
+ /*
     //ADJUST RED
     m1.explore();
     for (Pixel spot1 : M1pixels)
@@ -137,8 +137,27 @@ public class TestPicture17
     }
     m1.explore();
     m1.write("images/MotoAdjust1.jpg");
+    */
+   
+    //MIRROR
+    for (int r = 0; r < 426; r++)
+    {
+        for (int c = 0; c < 568; c++)
+        {
+            
+            
+            red = spot1.getRed();
+            green = spot1.getGreen();
+            blue = spot1.getBlue();
+            Color curColor = new Color (red, green, blue);
+            
+            spot1.setColor(curColor);
+        }
+    }
+    m1.explore();
+    m1.write("images/templeMirror.jpg");
         
- /**/
+ /*
      //NEGATE()
      for (Pixel p : M2pixels)
      {
@@ -156,7 +175,7 @@ public class TestPicture17
      }
      m2.explore();
      m2.write("images/MotoAdjust2.jpg");
-/**/
+/*
     //GRAYSCALE()
      int avg;
      for (Pixel p : M3pixels)
@@ -171,7 +190,7 @@ public class TestPicture17
      }
      m3.explore();
      m3.write("images/MotoAdjust3.jpg");
-/**/
+/*
     //LIGHTEN()
      for (Pixel p : M4pixels)
      {
@@ -185,7 +204,7 @@ public class TestPicture17
      m4.explore();
      m4.write("images/MotoAdjust4.jpg");
      
-/**/
+/*
     //COLORIFY()
     for (Pixel p : M5pixels)
      {
