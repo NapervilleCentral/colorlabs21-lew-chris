@@ -40,7 +40,8 @@ public class TestPicture17
      //moto.explore();
      
      int red, green, blue;
-     
+     Picture apic = new Picture("images/mcl38.jpg");
+     Picture canvas = new Picture("images/canvas.jpg");
      Picture m1 = new Picture("images/temple.jpg");
      /*Picture m2 = new Picture("images/redMotorcycle.jpg");
      Picture m3 = new Picture("images/redMotorcycle.jpg");
@@ -51,6 +52,11 @@ public class TestPicture17
      Pixel[] M1pixels;
      //gets pixels from picture and assigns to pixels array
      M1pixels = m1.getPixels();
+     
+     mirrorVert(apic);
+     apic.explore();
+     copytoCanvas(apic, canvas);
+     canvas.explore();
      /*
      Pixel[] M2pixels;
      M2pixels = m2.getPixels();
@@ -89,6 +95,7 @@ public class TestPicture17
     spot.setColor(newColor);
     spot2.setColor(newColor);
     //ferris1.explore();
+    
 
     for (int i = 0; i < 50000; i++)
     {
@@ -137,26 +144,7 @@ public class TestPicture17
     }
     m1.explore();
     m1.write("images/MotoAdjust1.jpg");
-    */
-   
-    //MIRROR
-    for (int r = 0; r < 426; r++)
-    {
-        for (int c = 0; c < 568; c++)
-        {
-            
-            
-            red = spot1.getRed();
-            green = spot1.getGreen();
-            blue = spot1.getBlue();
-            Color curColor = new Color (red, green, blue);
-            
-            spot1.setColor(curColor);
-        }
-    }
-    m1.explore();
-    m1.write("images/templeMirror.jpg");
-        
+    */    
  /*
      //NEGATE()
      for (Pixel p : M2pixels)
@@ -270,4 +258,47 @@ final double  FACTOR = .5;
 
     /**/
   }//main
+  
+  /**
+   * Method to mirror about a vertical line in the middle
+   * of the picture based on the width
+   */
+  
+  public static void mirrorVert(Picture apic)
+  {
+      int width = apic.getWidth();
+      int mirrorPoint = width/2;
+      Pixel leftPix = null;
+      Pixel rightPix = null;
+      
+      //loop through all the rows
+      for (int y = 0; y < apic.getHeight(); y++)
+      {
+          //loop from 0 to the middle
+          for (int x = 0; x < mirrorPoint; x++)
+          {
+              leftPix = apic.getPixel(x,y);
+              rightPix = apic.getPixel(width-1-x,y);
+              rightPix.setColor(leftPix.getColor());
+          }
+      }
+      
+  }
+  
+  public static void copytoCanvas(Picture source, Picture target)
+  {
+      Pixel sourcePix = null;
+      Pixel targetPix = null;
+      
+      //loop thru the columns (targetX is starting point on canvas)
+      for (int sourceX = 0, targetX = 0; sourceX  < source.getWidth(); sourceX++)
+      {
+          for (int sourceY = 0, targetY = 0; sourceY  < source.getHeight(); sourceY++)
+          {
+              sourcePix = source.getPixel(sourceX, sourceY);
+              targetPix = target.getPixel(targetX, targetY);
+              targetPix.setColor(sourcePix.getColor());
+          }
+      }
+  }
 }//class
