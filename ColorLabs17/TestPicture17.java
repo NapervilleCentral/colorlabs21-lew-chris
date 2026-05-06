@@ -43,6 +43,8 @@ public class TestPicture17
      Picture apic = new Picture("images/mcl38.jpg");
      Picture apic1 = new Picture("images/mcl38.jpg");
      Picture apic2 = new Picture("images/mcl38.jpg");
+     Picture apic3 = new Picture("images/mcl38.jpg");
+     Picture lando = new Picture("images/lando.jpg");
      Picture canvas = new Picture("images/canvas.jpg");
      //Picture m1 = new Picture("images/temple.jpg");
      /*Picture m2 = new Picture("images/redMotorcycle.jpg");
@@ -73,6 +75,10 @@ public class TestPicture17
      //4
      greyScale(apic2);
      copytoCanvasOffsets(apic2, canvas, 0, 1667);
+     
+     //5 blend
+     blend(apic3, lando);
+     copytoCanvasOffsets(apic3, canvas, 2500, 1667);
      
      canvas.explore();
      
@@ -397,9 +403,26 @@ final double  FACTOR = .5;
               targetPix.setColor(sourcePix.getColor());
           }
       }
+      
       recurScale(smaller, target);
   }
   
+  public static void blend(Picture source, Picture blendie)
+  {
+      Pixel sourcePix, blendPix;
+      
+      for (int x = 0; x < source.getWidth(); x++)
+      {
+          for (int y = 0; y < source.getHeight(); y+=2)
+          {
+              sourcePix = source.getPixel(x, y);
+              Color color = blendie.getPixel(x, y).getColor();
+              sourcePix.setColor(color);
+          }
+      }
+  }
+  
+    
   public static void copytoCanvasOffsets(Picture source, Picture target, int x, int y)
   {
       Pixel sourcePix = null;
