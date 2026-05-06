@@ -42,6 +42,7 @@ public class TestPicture17
      int red, green, blue;
      Picture apic = new Picture("images/mcl38.jpg");
      Picture apic1 = new Picture("images/mcl38.jpg");
+     Picture apic2 = new Picture("images/mcl38.jpg");
      Picture canvas = new Picture("images/canvas.jpg");
      //Picture m1 = new Picture("images/temple.jpg");
      /*Picture m2 = new Picture("images/redMotorcycle.jpg");
@@ -65,11 +66,13 @@ public class TestPicture17
      mirrorVert(apic);
      copytoCanvasOffsets(apic, canvas, 2500, 0);
      //3 recursive scale
-     /*
+     
      recurScale(apic1, apic1);
      copytoCanvasOffsets(apic1, canvas, 5000, 0);
-     */
+     
      //4
+     greyScale(apic2);
+     copytoCanvasOffsets(apic2, canvas, 0, 1667);
      
      canvas.explore();
      
@@ -302,14 +305,16 @@ final double  FACTOR = .5;
       
   }
   
-  public static void greyScale()
+  public static void greyScale(Picture source)
   {
+     Pixel[] Mpixels;
+     Mpixels = source.getPixels();
      int avg;
-     for (Pixel p : M3pixels)
+     for (Pixel p : Mpixels)
      {
-        blue = p.getBlue();
-        green = p.getGreen();
-        red = p.getRed();
+        int blue = p.getBlue();
+        int green = p.getGreen();
+        int red = p.getRed();
         avg = (blue + green + red)/3;
         p.setBlue(avg);
         p.setGreen(avg);
@@ -363,21 +368,36 @@ final double  FACTOR = .5;
       Pixel sourcePix = null;
       Pixel targetPix = null;
       
+      int newWidth = source.getWidth() / 2;
+      int newHeight = source.getHeight() / 2;
+      
+      Picture smaller = new Picture(newWidth, newHeight);
+
       if (source.getWidth() < 10)
           return;
       
       //loop thru the columns (targetX is starting point on canvas)    sourceX+=2 (larger sX = sX + .5)
-      for (int sourceX = 0, targetX = 0; sourceX  < source.getWidth(); sourceX++, targetX++)
+      for (int sourceX = 0, targetX = 0; sourceX  < source.getWidth(); sourceX+=2, targetX++)
       {
           //thru the rows                                                   sourceY+=2 (larger sY = sY + .5)
-          for (int sourceY = 0, targetY = 0; sourceY  < source.getHeight(); sourceY++, targetY++)
+          for (int sourceY = 0, targetY = 0; sourceY  < source.getHeight(); sourceY+=2, targetY++)
           {
               sourcePix = source.getPixel(sourceX, sourceY);
               targetPix = target.getPixel(targetX, targetY);
               targetPix.setColor(sourcePix.getColor());
           }
       }
-      recurScale(source, source);
+      
+      for (int x = 0; x < newWidth; x++)
+      {
+          for (int y = 0; y < newHeight; y++)
+          {
+              targetPix = target.getPixel(x, y);
+              sourcePix = smaller.getPixel(x, y);
+              targetPix.setColor(sourcePix.getColor());
+          }
+      }
+      recurScale(smaller, target);
   }
   
   public static void copytoCanvasOffsets(Picture source, Picture target, int x, int y)
