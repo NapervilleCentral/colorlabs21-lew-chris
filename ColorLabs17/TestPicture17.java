@@ -44,6 +44,7 @@ public class TestPicture17
      Picture apic1 = new Picture("images/mcl38.jpg");
      Picture apic2 = new Picture("images/mcl38.jpg");
      Picture apic3 = new Picture("images/mcl38.jpg");
+     Picture apic4 = new Picture("images/mcl38.jpg");
      Picture lando = new Picture("images/lando.jpg");
      Picture canvas = new Picture("images/canvas.jpg");
      //Picture m1 = new Picture("images/temple.jpg");
@@ -62,6 +63,7 @@ public class TestPicture17
      //M1pixels = m1.getPixels();
      
      */
+    /**/
      //1
      copytoCanvas(apic, canvas);
      //2 Mirror
@@ -74,13 +76,18 @@ public class TestPicture17
      
      //4
      greyScale(apic2);
-     copytoCanvasOffsets(apic2, canvas, 0, 1667);
+     copytoCanvasOffsets(apic2, canvas, 2500, 1667);
      
      //5 blend
      blend(apic3, lando);
-     copytoCanvasOffsets(apic3, canvas, 2500, 1667);
+     copytoCanvasOffsets(apic3, canvas, 0, 1667);
+     
+     //6 colorify
+     colorify(apic4);
+     copytoCanvasOffsets(apic4, canvas, 5000, 1667);
      
      canvas.explore();
+     canvas.write("images/collageFinal.jpg");
      
      
      /*
@@ -325,6 +332,39 @@ final double  FACTOR = .5;
         p.setBlue(avg);
         p.setGreen(avg);
         p.setRed(avg);
+     }
+  }
+  
+  public static void colorify(Picture source)
+  {
+     Pixel[] Mpixels;
+     Mpixels = source.getPixels();
+     
+     Color orange = new Color(255, 159, 64);
+     Color neworange = new Color(255, 184, 95);
+     Color gray = new Color(211,211,211);
+     Color offwhite = new Color(230, 220, 199);
+     Color lightblue = new Color(106, 174, 199);
+     Color darkblue = new Color(24, 67, 83);
+     
+     for (Pixel p : Mpixels)
+     {
+        int avg = (int)(p.getAverage());
+        p.setBlue(avg);
+        p.setGreen(avg);
+        p.setRed(avg);
+     }
+     for (Pixel p : Mpixels)
+     {  
+        int value = p.getBlue();
+        if (value < 70)
+            p.setColor(darkblue);
+        else if (value < 126)
+            p.setColor(orange);
+        else if (value < 189)
+            p.setColor(lightblue);
+        else
+            p.setColor(offwhite);
      }
   }
   
