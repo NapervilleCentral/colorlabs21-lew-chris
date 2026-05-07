@@ -369,47 +369,40 @@ final double  FACTOR = .5;
       }
   }
   
-  public static void recurScale(Picture source, Picture target)
-  {
-      Pixel sourcePix = null;
-      Pixel targetPix = null;
-      
-      int newWidth = source.getWidth() / 2;
-      int newHeight = source.getHeight() / 2;
-      
-      Picture smaller = new Picture(newWidth, newHeight);
-
-      if (source.getWidth() < 10)
-          return;
-      
-      //loop thru the columns (targetX is starting point on canvas)    sourceX+=2 (larger sX = sX + .5)
-      for (int sourceX = 0, targetX = 0; sourceX  < source.getWidth(); sourceX+=2, targetX++)
-      {
-          //thru the rows                                                   sourceY+=2 (larger sY = sY + .5)
-          for (int sourceY = 0, targetY = 0; sourceY  < source.getHeight(); sourceY+=2, targetY++)
-          {
-              sourcePix = source.getPixel(sourceX, sourceY);
-              targetPix = target.getPixel(targetX, targetY);
-              targetPix.setColor(sourcePix.getColor());
-          }
-      }
-      
-      for (int x = 0; x < newWidth; x++)
-      {
-          for (int y = 0; y < newHeight; y++)
-          {
-              targetPix = target.getPixel(x, y);
-              sourcePix = smaller.getPixel(x, y);
-              targetPix.setColor(sourcePix.getColor());
-          }
-      }
-      
-      recurScale(smaller, target);
-  }
+    public static void recurScale(Picture source, Picture target)
+    {
+        if (source.getWidth() < 10)
+            return;
+        
+        int newWidth = source.getWidth() / 2;
+        int newHeight = source.getHeight() / 2;
+        
+        Picture smaller = new Picture(newWidth, newHeight);
+        
+        for (int x = 0; x < newWidth; x++)
+        {
+            for (int y = 0; y < newHeight; y++)
+            {
+                Color c = source.getPixel(x * 2, y * 2).getColor();
+                smaller.getPixel(x, y).setColor(c);
+            }
+        }
+        
+        for (int x = 0; x < newWidth; x++)
+        {
+            for (int y = 0; y < newHeight; y++)
+            {
+                Color c = smaller.getPixel(x, y).getColor();
+                target.getPixel(x, y).setColor(c);
+            }
+        }
+        
+        recurScale(smaller, target);
+    }
   
   public static void blend(Picture source, Picture blendie)
   {
-      Pixel sourcePix, blendPix;
+      Pixel sourcePix;
       
       for (int x = 0; x < source.getWidth(); x++)
       {
@@ -422,7 +415,6 @@ final double  FACTOR = .5;
       }
   }
   
-    
   public static void copytoCanvasOffsets(Picture source, Picture target, int x, int y)
   {
       Pixel sourcePix = null;
