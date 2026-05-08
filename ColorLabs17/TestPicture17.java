@@ -84,6 +84,7 @@ public class TestPicture17
      
      //6 colorify
      colorify(apic4);
+     apic4.write("images/mcl38colorified.jpg");
      copytoCanvasOffsets(apic4, canvas, 5000, 1667);
      
      canvas.explore();
